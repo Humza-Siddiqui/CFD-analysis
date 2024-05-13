@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Humza Siddiqui CFD analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>CFD<br />
+						Analysis</h1>
+						<p> Using CFD methods to work out drag values on an airfoil in transonic flow.
+					</div>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Project</a></li>
+						</ul>
+					</nav>
+
+				<!-- Intorduction -->
+					<div id="main">
+							<article class="post featured">
+								<header class="major">	
+									<h3>Introduction</h3>
+									<p> 
+										Main objective of this lab was to compare different approximation methods to
+										solve for transonic flow. These methods involved TSDE, Prandtl-Glauert and
+										incompressible assumptions. We were provided data for TSDE and incompressible
+										data. To solve using the Prandtl-Glauert method we used the jacobi method to iterate
+										the velocities at different points on the grid. To ensure that the velocities values
+										converged we chose our max error to be below 1*10^-6. To fully define the grid we
+										used boundary conditions. For left and right and top edges we just assumed that the
+										velocities are the same as the velocities two points from it. We can assume this since
+										the flow is undisturbed at those points. For the bottom part we can only make this
+										assumption when the flow is not in the airfoil. When the flow is in the airfoil we have
+										to use φ 𝑖,3 − 2∆𝑧𝑧'. Now that the flow is fully defined inside the grid we can do data
+										analysis and work out the Cp values around the airfoil. The result we got shows that
+										for M = 0.3 where the flow is subsonic all 3 methods have very similar output. But
+										when we reach the transonic domain M = 0.85 the Cp values start to differ. This is
+										because at 0.85 there is a shock wave located on the airfoil surface. Cd values are very
+										low, almost zero for M = 0.3 because the airfoil is at zero degrees angle of attack and
+										this can be seen from all the methods. For M = 0.85 the drag is almost zero until the
+										point where a shock wave occurs in the airfoil. Then we have some significant Cd
+										values. This can only be seen from TSDE since that is the only method that accounts
+										for shock waves. In conclusion the TSDE equation is the closest to real life flow. This
+										is because it accounts for the shock waves. Prandlt-Glauert overshoots the Cp values
+										but is still reliable to just see a rough estimate of the flow. Incompressible predicts the
+										worst at high or transonic speeds.
+									    </p>
+										<img src="images/CFD.jpg" controls width = "100%" height = "100%" >
+										<h6> Figure 1 (shows CFD grid setup)</h6>
+										<p>From figure 1 we can see how the grid is setup whil doing CFD. Also how the boundary conditions are used to fully define the grid.
+											Simulating the subsonic small disturbance equation is a crucial endeavor in aerodynamics, offering deep
+											insights into the behavior of airflow around airfoils at subsonic speeds. By solving this equation, engineers gain a
+											comprehensive understanding of lift generation, flow patterns, and the distribution of pressure around airfoils. This
+											understanding facilitates the prediction of aerodynamic forces such as lift and drag, essential for designing efficient
+											and stable aircraft. Moreover, simulations enable the optimization of airfoil shapes to achieve desired performance
+											metrics, while also serving as a means to validate experimental data and explore various design trade-offs. As both
+											an educational tool and a platform for advanced research, simulations of the subsonic small disturbance equation
+											play a pivotal role in advancing our understanding of aerodynamics and driving innovation in aircraft design
+										</p>
+									<img src="images/CFD code.png" controls width = "100%" height = "100%" >
+									<h6> Figure 2 (shows CFD code used in MATLAB)</h6>
+									<p>From figure 2 we can see that the first part of the code fully defines the grid point in MATLAB. Then after the grid is fully define I used Jacobi method to work out the velocity at each pont in the grid. Then using those velocity values I worked out the Cd and Cp values.</p>
+								</article>
+			</divdiv>
+
+				<!-- Results-->
+					<div>
+						<article>
+							<header class="major">	
+									<h3>Results</h3>
+
+									<img src="images/Sub.png" controls width = "100%" height = "100%" >
+									<h6> Figure 3 (Cp distribution for thr airfoil at 0.3 mach number)</h6>		
+									<p> From figure 3 we can see that the Cp distribution for M = 0.3 is almost the same from all the methods. This
+										is because at M = 0.3 the flow stays subsonic throughout the end and no shock waves happen on the airfoil surface.
+										Subsonic code and TSDE code both result in almost the same Cp on the airfoil.
+										Also from the graph we can see that the incompressible graph looks very similar to the subsonic code
+										graph. This is because when the speed is very low like in this case the flow can be assumed to be incompressible.
+										This is why subsonic also gives almost the same result as subsonic code.
+										To sum it up, for a low speed flow we can assume incompressibility and work with linear flow to get very
+										accurate results with much less work</p>
+
+									<img src="images/trans.png" controls width = "100%" height = "100%" >
+									<h6> Figure 4 (Cp distribution for thr airfoil at 0.85 mach number)</h6>	
+									<p> Figure 4 shows how Cp distribution varies over the airfoil for all the methods. From the graph we can see
+										that there are many variations here. Unlike for M = 0.3 where the graphs were almost identical. From comparing
+										figure 2 and 3 we can see that the incompressible data is almost the same for both mach numbers. We know that this
+										should not be the case. For subsonic code the graph takes the same shape in both the cases but for M = 0.85 the Cp
+										values are a lot higher since max Cp for M = 0.3 was around 0.3 but for M = 0.85 it's about 0.55.
+										Graph that changed the most from figure 3 to 4 is the TSDE graph. Main reason for this is because TSDE
+										code accounts for shock waves. We know from theory that the flow reaches M = 1 on the airfoil somewhere for this
+										case. When the flow reaches M = 1 a shock wave occurs on the surface of the airfoil. Pressure drops drastically after
+										a shock wave. Hence that is why we see e drop in the Cp value from X = 0.66 to 0.68.
+										From all these observations we can conclude that the best numerical method to solve for transonic flow is
+										TSDE since this is the only method that accounts for the shock waves which are a crucial part of transonic flow.
+										Figure 3 and 4 are generated using the MATLAB code attached in the appendix. Prandtl-Glauert data was
+										generated using the CFD code but TSDE and incompressible data were given to us..</p>
+
+									<img src="images/table.png" controls width = "400" height = "200" >
+									<h6> Figure 5 (Cd  values using all 3 methods.)</h6>		
+									<p> From figure 5 we can see that the Cd values from all the methods for both the mach numbers are almost
+										zero. One reason for this is that the airfoil is symmetric and at 0 degrees angle of attack. From theory we know that
+										this will produce no lift. Also no drag since we assumed inviscid flow so skin friction drag is removed. Leaving us
+										with only one kind of drag which is wave drag. TSDE is the only method that accounts for shock waves. Hence This
+										is why the Cd values for TSDE are not very very small. The only significant Cd value is for TSDE M = 0.85. This is
+										due to the shock wave occurring on the airfoil. This can also be proved using D'alembert's principle. Which states
+										that if an object is immersed in a fluid stream and is unbounded in every direction then the net parallel force exerted
+										by the inviscid flow will always be zero</p>	
+						</article>		
+					</div>
+
+				<!--conclusion-->
+					<div>
+						<article>
+							<header class="major">	
+										<h3>Conclusion</h3>		
+										<p>  In conclusion we can say to solve transonic flow and get the full picture of what is going on on each point
+											of the airfoil we have to use TSDE code. Prandtl-Glauert can only give us a very rough estimate on what the Cp
+											looks like on the airfoil. Incompressible tells us nothing about the transonic flow abilities. Therefore if precise data
+											is needed then TSDE should be used otherwise for rough data Prandtl-Glauert can work. For low speed flow
+											incompressible assumption is the best method since it gives out the solution very fast and it is pretty accurate.</p>
+										<p>Intelligent insights gleaned from modeling or numerical experiments are invaluable for understanding
+											complex systems and informing decision-making processes across various domains. These insights encompass
+											predicting unobservable phenomena, exploring parametric sensitivity, understanding emergent properties,
+											quantifying uncertainty and risk, validating and calibrating models, and gaining insights into complex dynamics.
+											Through numerical simulations, researchers can predict intricate behaviors, uncover hidden patterns, and explore the
+											effects of changing parameters or conditions on system behavior. Moreover, simulations enable the study of
+											emergent properties arising from interactions between components, providing crucial insights into system-level
+											behavior. By quantifying uncertainty and risk, researchers can assess the reliability of model predictions and make
+											informed decisions in the face of uncertainty. Additionally, numerical experiments play a key role in validating
+											models against empirical data, refining model parameters, and improving predictive accuracy. Ultimately, these
+											intelligent insights drive innovation, support evidence-based decision-making, and enhance our understanding of
+											complex systems, fostering progress and sustainability in diverse fields.</p>	
+							</article>
+					</div>
+
+<!-- Footer -->
+	<div>
+		<footer id="footer">
+			<section>
+			<section class="split contact">
+			<h3>Email</h3>
+			<p>msiddi14@asu.edu</p>
+			</section>
+		</footer>
+	</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
